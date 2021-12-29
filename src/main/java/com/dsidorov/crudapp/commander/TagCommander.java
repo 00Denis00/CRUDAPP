@@ -2,6 +2,7 @@ package com.dsidorov.crudapp.commander;
 
 import com.dsidorov.crudapp.controller.TagController;
 import com.dsidorov.crudapp.model.Tag;
+import com.dsidorov.crudapp.repository.TagStatus;
 
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +11,14 @@ public class TagCommander
 {
     Scanner scanner = new Scanner(System.in);
     TagController tagController = new TagController();
+    public void chech()
+    {
+        System.out.println("Enter id: ");
+        Integer id = scanner.nextInt();
+        TagStatus T = tagController.check(id);
+        System.out.println(T);
+        System.out.println();
+    }
     public void getById()
     {
         System.out.println("Enter id: ");

@@ -5,8 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +13,31 @@ public interface TagRepository
 {
     final Gson gson = new Gson();
     final String FILE_PATH = "C:\\Users\\sdden\\Desktop\\Программирование\\crudapp\\tags.json";
+    TagStatus deleted = TagStatus.DELETED;
+    TagStatus active = TagStatus.ACTIVE;
+
+    public default TagStatus check(Integer id) {
+        //Проверяет элемент по ID
+        int z = -100;
+        List<Tag> tags = getAllTagsInternal();
+        for(int i = 0; i < tags.size(); i++)
+        {
+            Tag tag = tags.get(i);
+            int j = tag.getId();
+            if(j == id)
+            {
+                z = i;
+            }
+        }
+        if(z == -100)
+        {
+            return deleted;
+        }
+        else
+        {
+            return active;
+        }
+    }
 
     public default String getById(Integer id) {
         //Показывает элемент по ID
